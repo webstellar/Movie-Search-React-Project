@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import SearchIcon from "./search.svg";
-//give the svg a name to reused
+//give the svg a name to reuse
 
 import MovieCard from "./component/MovieCard";
 
