@@ -17,7 +17,11 @@ import MovieCard from "./component/MovieCard";
 //The await keyword can only be used inside an async function.
 //title = movie search term or search title
 
-const API_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=b6fb262a";
+const API_URL = process.env.REACT_APP_API_URL;
+
+let urlTrimmed = API_URL.replace(";", "");
+
+console.log(urlTrimmed);
 
 //Static data just to see what we'll be writing out in JSX
 // const movie1 = {
@@ -88,7 +92,7 @@ const App = () => {
 
   //searchMovies function to make a promise to the movie API
   const searchMovies = async (title) => {
-    const response = await fetch(`${API_URL}&s=${title}`);
+    const response = await fetch(`${urlTrimmed}&s=${title}`);
     const data = await response.json();
 
     setMovies(data.Search);
@@ -120,8 +124,8 @@ const App = () => {
       </div>
       {movies?.length > 0 ? (
         <div className="container">
-          {movies.map((movie) => (
-            <MovieCard movie={movie} />
+          {movies.map((movie, i) => (
+            <MovieCard key={i} movie={movie} />
           ))}
         </div>
       ) : (
